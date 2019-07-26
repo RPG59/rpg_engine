@@ -70,8 +70,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\RPG59\_LIB\GRAPHICS\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\RPG59\_LIB\GRAPHICS\src\GLFW;C:\Users\RPG59\_LIB\GRAPHICS\src\GLEW;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\KanshinIS\__LIB\graphics\glew-2.1.0\include\GL;C:\Users\KanshinIS\__LIB\graphics\glfw-3.3.bin.WIN32\include\GLFW;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\KanshinIS\__LIB\graphics\glew-2.1.0\lib\Release\Win32;C:\Users\KanshinIS\__LIB\graphics\glfw-3.3.bin.WIN32\lib-vc2019;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>C:\Users\KanshinIS\__LIB\graphics\glfw-3.3.bin.WIN32\include\GLFW;C:\Users\KanshinIS\__LIB\graphics\glew-2.1.0\include\GL;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\KanshinIS\__LIB\graphics\glfw-3.3.bin.WIN32\lib-vc2019;C:\Users\KanshinIS\__LIB\graphics\glew-2.1.0\lib\Release\Win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -92,6 +96,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

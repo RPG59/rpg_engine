@@ -26,6 +26,12 @@ namespace graphics {
 				size.x, size.y, 0,
 				size.x, 0, 0
 			};
+			//float vertices[] = {
+			//	-.5f, -.5f, .0f,
+			//	.5f, -.5f, .0f,
+			//	.5f, .5f, .0f,
+			//	-.5f, .5f, .0f,
+			//};
 			float colors[] = {
 				color.x, color.y, color.z, color.w,
 				color.x, color.y, color.z, color.w,

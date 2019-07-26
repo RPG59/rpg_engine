@@ -81,6 +81,42 @@ namespace graphics {
 		}
 	}
 
+	void Shader::SetUniform(const char* name, float4 vec)
+	{
+		if (!isEnable) Enable();
+		int location = glGetUniformLocation(program, name);
+		if (location != -1) {
+			glUniform4f(location, vec.x, vec.y, vec.z, vec.w);
+		}
+		else {
+			std::cout << "Uniform float4 Error!" << std::endl;
+		}
+	}
+
+	void Shader::SetUniform(const char* name, float3 vec)
+	{
+		if (!isEnable) Enable();
+		int location = glGetUniformLocation(program, name);
+		if (location != -1) {
+			glUniform3f(location, vec.x, vec.y, vec.z);
+		}
+		else {
+			std::cout << "Uniform float3 Error!" << std::endl;
+		}
+	}
+
+	void Shader::SetUniform(const char* name, float2 vec)
+	{
+		if (!isEnable) Enable();
+		int location = glGetUniformLocation(program, name);
+		if (location != -1) {
+			glUniform2f(location, vec.x, vec.y);
+		}
+		else {
+			std::cout << "Uniform float2 Error!" << std::endl;
+		}
+	}
+
 	void Shader::Enable()
 	{
 		glUseProgram(program);

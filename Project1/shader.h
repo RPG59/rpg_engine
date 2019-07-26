@@ -4,7 +4,7 @@
 #include <iostream>
 
 #include "Math.h"
-#include <GLEW/glew.h>
+#include <glew.h>
 
 namespace graphics {
 	class Shader {
@@ -13,6 +13,9 @@ namespace graphics {
 		Shader(const char* vsPath, const char* fsPath);
 		void SetUniform(const char*, float x);
 		void SetUniform(const char*, float4x4 vec);
+		void SetUniform(const char*, float2 vec);
+		void SetUniform(const char*, float3 vec);
+		void SetUniform(const char*, float4 vec);
 
 		void Enable();
 		void Disable();

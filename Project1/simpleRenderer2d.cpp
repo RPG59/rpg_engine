@@ -17,7 +17,7 @@ namespace graphics {
 			renderable->getVAO()->bind();
 			renderable->getIBO()->bind();
 			
-			//renderable->getShader().SetUniform("ml_matrix", matrix);
+			renderable->getShader().SetUniform("u_ModelMatrix", matrix);
 			glDrawElements(GL_TRIANGLES, renderable->getIBO()->getCount(), GL_UNSIGNED_SHORT, nullptr);
 			m_RanderQueue.pop_front();
 		}

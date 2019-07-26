@@ -1,5 +1,5 @@
 #pragma once
-#include <GLEW/glew.h>
+#include <glew.h>
 
 #include "renderable2d.h"
 #include "Math.h"

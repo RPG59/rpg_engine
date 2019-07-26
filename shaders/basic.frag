@@ -1,9 +1,13 @@
 #version 440 
 
-out vec4 color;
+layout(location=0) out vec4 fragColor;
+uniform vec4 color;
+uniform vec2 light_pos;
+in vec4 pos;
 
 void main()
 {
-	color = vec4(0.3, 0.4, 0.5, 1.0);
+    float intensity = 1.0 / length(pos.xy - light_pos);
+    fragColor = color * intensity; 
 }
 
