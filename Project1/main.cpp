@@ -20,20 +20,21 @@ int main()
 	Shader shader("../shaders/basic.vert", "../shaders/basic.frag");
 	shader.Enable();
 	shader.SetUniform("u_ProjectionMatrix", matrix);
-	shader.SetUniform("color", float4(.2f, .8f, .8f, 1.f));
 
-	Renderable2D* sprite = new Renderable2D(float3(-5, -5, 0), float2(4, 5), float4(1, 0, 1, 1), shader);
+	Renderable2D* sprite = new Renderable2D(float3(-5, -5, 0), float2(4, 5), float4(.2f, .8f, .8f, 1.f), shader);
+	Renderable2D* sprite2 = new Renderable2D(float3(-2, -2, 0), float2(3, 3), float4(.2f, .1f, .8f, 1.f), shader);
 	SimpleRenderer2D renderer;
 
 	while (!window.isClosed())
 	{
 		double x, y;
 		Window::getMousePosition(x, y);
-		shader.SetUniform("light_pos", float2(((x - 512) / 51.2f), (y - 278) / 27.8f));
+		shader.SetUniform("light_pos", float2((float)(x * 16.f / 1024.f), (float)(9.f - y * 9.f / 576.f)));
 		std::cout << x << ", " << y << std::endl;
 		window.clear();
 
 		renderer.submit(sprite);
+		renderer.submit(sprite2);
 		renderer.flush();
 
 		window.update();

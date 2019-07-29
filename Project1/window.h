@@ -1,8 +1,8 @@
 #pragma once
 #include <iostream>
 
-#include <glew.h>
-#include <glfw3.h>
+#include <GLEW/glew.h>
+#include <GLFW/glfw3.h>
 
 namespace graphics {
 #define MAX_KEYS 1024

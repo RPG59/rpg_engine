@@ -51,6 +51,15 @@
     <ClCompile Include="simpleRenderer2d.cpp">
       <Filter>Source Files\core\graphics</Filter>
     </ClCompile>
+    <ClCompile Include="batchRenderer2D.cpp">
+      <Filter>Source Files\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="static_sprite.cpp">
+      <Filter>Source Files\core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="sprite.cpp">
+      <Filter>Source Files\core\graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window.h">
@@ -78,6 +87,15 @@
       <Filter>Source Files\core\graphics</Filter>
     </ClInclude>
     <ClInclude Include="simpleRenderer2d.h">
+      <Filter>Source Files\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="batchRenderer2D.h">
+      <Filter>Source Files\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="static_sprite.h">
+      <Filter>Source Files\core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite.h">
       <Filter>Source Files\core\graphics</Filter>
     </ClInclude>
   </ItemGroup>

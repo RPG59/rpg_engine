@@ -1,9 +1,9 @@
 #version 440 
 
 layout(location=0) out vec4 fragColor;
-uniform vec4 color;
 uniform vec2 light_pos;
 in vec4 pos;
+in vec4 color;
 
 void main()
 {

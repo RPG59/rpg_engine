@@ -70,8 +70,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\KanshinIS\__LIB\graphics\glew-2.1.0\include\GL;C:\Users\KanshinIS\__LIB\graphics\glfw-3.3.bin.WIN32\include\GLFW;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\KanshinIS\__LIB\graphics\glew-2.1.0\lib\Release\Win32;C:\Users\KanshinIS\__LIB\graphics\glfw-3.3.bin.WIN32\lib-vc2019;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Dev\C++\rpg_engline\dep\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Dev\C++\rpg_engline\dep\src\GLFW;C:\Dev\C++\rpg_engline\dep\src\GLEW;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>C:\Users\KanshinIS\__LIB\graphics\glfw-3.3.bin.WIN32\include\GLFW;C:\Users\KanshinIS\__LIB\graphics\glew-2.1.0\include\GL;$(IncludePath)</IncludePath>
@@ -133,15 +133,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="batchRenderer2D.cpp" />
     <ClCompile Include="buffer.cpp" />
     <ClCompile Include="indexBuffer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="simpleRenderer2d.cpp" />
+    <ClCompile Include="sprite.cpp" />
+    <ClCompile Include="static_sprite.cpp" />
     <ClCompile Include="VertexArray.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="batchRenderer2D.h" />
     <ClInclude Include="buffer.h" />
     <ClInclude Include="indexBuffer.h" />
     <ClInclude Include="renderable2d.h" />
@@ -149,6 +153,8 @@
     <ClInclude Include="shader.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="simpleRenderer2d.h" />
+    <ClInclude Include="sprite.h" />
+    <ClInclude Include="static_sprite.h" />
     <ClInclude Include="VertexArray.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>

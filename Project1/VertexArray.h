@@ -1,8 +1,8 @@
 #pragma once
 
 #include <vector>
-#include <glew.h>
 
+#include <GLEW/glew.h>
 #include "buffer.h"
 
 namespace graphics {

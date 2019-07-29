@@ -4,7 +4,8 @@
 #include <iostream>
 
 #include "Math.h"
-#include <glew.h>
+
+#include <GLEW/glew.h>
 
 namespace graphics {
 	class Shader {
