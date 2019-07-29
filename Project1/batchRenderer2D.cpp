@@ -3,7 +3,7 @@
 namespace graphics {
 	BatchRenderer2D::BatchRenderer2D()
 	{
-		this->init();
+		init();
 	}
 
 	BatchRenderer2D::~BatchRenderer2D()
@@ -24,7 +24,7 @@ namespace graphics {
 		glEnableVertexAttribArray(SHADER_VERTEX_INDEX);
 		glEnableVertexAttribArray(SHADER_COLOR_INDEX);
 		glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FLOAT, RENDERER_VERTEX_SIZE, 0);
-		glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_FLOAT, GL_FLOAT, RENDERER_VERTEX_SIZE, (const GLvoid*)(3 * GL_FLOAT));
+		glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_FLOAT, GL_FLOAT, RENDERER_VERTEX_SIZE, (const GLvoid*)(3 * sizeof(GLfloat)));
 		glBindBuffer(GL_ARRAY_BUFFER, NULL);
 
 		GLushort indices[RENDERER_INDICES_SIZE];
@@ -47,14 +47,59 @@ namespace graphics {
 		glBindVertexArray(NULL);     
 	}
 
+	void BatchRenderer2D::begin()
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+		m_Buffer = reinterpret_cast<VertexData*>(glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY));
+	}
+
 	void BatchRenderer2D::submit(const Renderable2D* renderable)
 	{
+		const float3& position = renderable->getPosition();
+		const float4& color = renderable->getColor();
+		const float2& size = renderable->getSize();
+
+		m_Buffer->vertices = position;
+		m_Buffer->color = color;
+		m_Buffer++;
+
+		m_Buffer->vertices = float3(position.x, position.y + size.y, position.z);
+		m_Buffer->color = color;
+		m_Buffer++;
+
+		m_Buffer->vertices = float3(position.x + size.x, position.y + size.y, position.z);
+		m_Buffer->color = color;
+		m_Buffer++;
+
+		m_Buffer->vertices = float3(position.x + size.x, position.y, position.z);
+		m_Buffer->color = color;
+		m_Buffer++;
+
+		m_IndexCount += 6;
+	}
+
+	void BatchRenderer2D::end()
+	{
+		glUnmapBuffer(GL_ARRAY_BUFFER);
 	}
 
 	void BatchRenderer2D::flush()
 	{
+		glBindVertexArray(m_VAO);
+		m_IBO->bind();
 
+		glDrawElements(GL_TRIANGLES, m_IndexCount, GL_UNSIGNED_SHORT, NULL);
+
+		m_IBO->unbind();
+		glBindVertexArray(NULL);
+
+		m_IndexCount = 0;
 	}
 
 }
+
+
+
+
+
 

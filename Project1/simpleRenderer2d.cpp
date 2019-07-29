@@ -3,22 +3,22 @@
 namespace graphics {
 	void SimpleRenderer2D::submit(const Renderable2D* renderable)
 	{
-		m_RanderQueue.push_back(renderable);
+		m_RanderQueue.push_back((StaticSprite*) renderable);
 	}
 	
 	void SimpleRenderer2D::flush()
 	{
 		while (!m_RanderQueue.empty())
 		{
-			const Renderable2D* renderable = m_RanderQueue.front();
+			const StaticSprite* sprite = m_RanderQueue.front();
 			float4x4 matrix;
 
-			matrix.translate(renderable->getPosition());
-			renderable->getVAO()->bind();
-			renderable->getIBO()->bind();
+			matrix.translate(sprite->getPosition());
+			sprite->getVAO()->bind();
+			sprite->getIBO()->bind();
 			
-			renderable->getShader().SetUniform("u_ModelMatrix", matrix);
-			glDrawElements(GL_TRIANGLES, renderable->getIBO()->getCount(), GL_UNSIGNED_SHORT, nullptr);
+			sprite->getShader().SetUniform("u_ModelMatrix", matrix);
+			glDrawElements(GL_TRIANGLES, sprite->getIBO()->getCount(), GL_UNSIGNED_SHORT, nullptr);
 			m_RanderQueue.pop_front();
 		}
 	}
