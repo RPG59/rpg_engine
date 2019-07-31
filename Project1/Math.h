@@ -33,6 +33,12 @@ struct float4 {
 	float y;
 	float z;
 	float w;
+	float4() {
+		x = 0.0f;
+		y = 0.0f;
+		z = 0.0f;
+		w = 0.0f;
+	}
 	float4(float x, float y, float z, float w) {
 		this->x = x;
 		this->y = y;
@@ -53,7 +59,7 @@ struct float4x4 {
 		elements[3 + 3 * 4] = 1.0f;
 	}
 
-	void orthographic(float left, float right, float top, float bottom, float nearPlan, float farPlan) {
+	float4x4 orthographic(float left, float right, float top, float bottom, float nearPlan, float farPlan) {
 		identity();
 
 		elements[0 + 0 * 4] = 2.0f / (right - left);
@@ -63,6 +69,21 @@ struct float4x4 {
 		elements[0 + 3 * 4] = (left + right) / (left - right);
 		elements[1 + 3 * 4] = (bottom + top) / (bottom - top);
 		elements[2 + 3 * 4] = (farPlan + nearPlan) / (farPlan - nearPlan);
+	}
+
+	static float4x4 createOrthographic(float left, float right, float top, float bottom, float nearPlan, float farPlan) {
+		float4x4 matrix;
+		matrix.identity();
+
+		matrix.elements[0 + 0 * 4] = 2.0f / (right - left);
+		matrix.elements[1 + 1 * 4] = 2.0f / (top - bottom);
+		matrix.elements[2 + 2 * 4] = 2.0f / (nearPlan - farPlan);
+
+		matrix.elements[0 + 3 * 4] = (left + right) / (left - right);
+		matrix.elements[1 + 3 * 4] = (bottom + top) / (bottom - top);
+		matrix.elements[2 + 3 * 4] = (farPlan + nearPlan) / (farPlan - nearPlan);
+
+		return matrix;
 	}
 
 	void translate(float3 vector) {

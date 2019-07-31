@@ -21,14 +21,12 @@ namespace graphics {
 		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 
 
-		//glBufferData(GL_ARRAY_BUFFER, sizeof(vert), vert, GL_STATIC_DRAW);
 
 		glBufferData(GL_ARRAY_BUFFER, RENDERER_BUFFER_SIZE, NULL, GL_DYNAMIC_DRAW);
 		glEnableVertexAttribArray(SHADER_VERTEX_INDEX);
 		glEnableVertexAttribArray(SHADER_COLOR_INDEX);
-		//glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, 0, 0);
 		glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, 0);
-		glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)(3 * sizeof(GLfloat)));
+		glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_UNSIGNED_BYTE, GL_TRUE, RENDERER_VERTEX_SIZE, (const void*)offsetof(VertexData, VertexData::color));
 		glBindBuffer(GL_ARRAY_BUFFER, NULL);
 
 		GLushort indices[RENDERER_INDICES_SIZE];
@@ -55,18 +53,6 @@ namespace graphics {
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 		m_Buffer = reinterpret_cast<VertexData*>(glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY));
-		//float vert[] = {
-		//	-5.f, -5.f, 0.f,
-		//	5.f, -5.f, 0.f,
-		//	5.f, 5.f, 0.f,
-		//	-5.f, 5.f, 0.f,
-		//};
-
-		//glBufferData(GL_ARRAY_BUFFER, sizeof(vert), vert, GL_STATIC_DRAW);
-
-		//void* ptr = glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
-		//CopyMemory(ptr, vert, sizeof(vert));
-		//glUnmapBuffer(GL_ARRAY_BUFFER);
 	}
 
 	void BatchRenderer2D::submit(const Renderable2D* renderable)
@@ -75,20 +61,27 @@ namespace graphics {
 		const float4& color = renderable->getColor();
 		const float2& size = renderable->getSize();
 
+		uint8_t r = color.x * 255.f;
+		uint8_t g = color.y * 255.f;
+		uint8_t b = color.z * 255.f;
+		uint8_t a = color.w * 255.f;
+
+		const uint32_t packedColor = a << 24 | b << 16 | g << 8 | r;
+
 		m_Buffer->vertices = position;
-		m_Buffer->color = color;
+		m_Buffer->color = packedColor;
 		m_Buffer++;
 
 		m_Buffer->vertices = float3(position.x, position.y + size.y, position.z);
-		m_Buffer->color = color;
+		m_Buffer->color = packedColor;
 		m_Buffer++;
 
 		m_Buffer->vertices = float3(position.x + size.x, position.y + size.y, position.z);
-		m_Buffer->color = color;
+		m_Buffer->color = packedColor;
 		m_Buffer++;
 
 		m_Buffer->vertices = float3(position.x + size.x, position.y, position.z);
-		m_Buffer->color = color;
+		m_Buffer->color = packedColor;
 		m_Buffer++;
 
 		m_IndexCount += 6;
@@ -105,7 +98,6 @@ namespace graphics {
 		m_IBO->bind();
 
 		glDrawElements(GL_TRIANGLES, m_IndexCount, GL_UNSIGNED_SHORT, NULL);
-		//glDrawElements(GL_TRIANGLES, m_IndexCount, GL_UNSIGNED_SHORT, nullptr);
 
 		m_IBO->unbind();
 		glBindVertexArray(NULL);

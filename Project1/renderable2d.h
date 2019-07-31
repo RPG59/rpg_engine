@@ -9,7 +9,7 @@ namespace graphics {
 	struct VertexData
 	{
 		float3 vertices;
-		float4 color;
+		uint32_t color;
 	};
 
 	class Renderable2D {
