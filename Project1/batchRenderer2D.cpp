@@ -20,11 +20,15 @@ namespace graphics {
 		glBindVertexArray(m_VAO);
 		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 
+
+		//glBufferData(GL_ARRAY_BUFFER, sizeof(vert), vert, GL_STATIC_DRAW);
+
 		glBufferData(GL_ARRAY_BUFFER, RENDERER_BUFFER_SIZE, NULL, GL_DYNAMIC_DRAW);
 		glEnableVertexAttribArray(SHADER_VERTEX_INDEX);
 		glEnableVertexAttribArray(SHADER_COLOR_INDEX);
-		glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FLOAT, RENDERER_VERTEX_SIZE, 0);
-		glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_FLOAT, GL_FLOAT, RENDERER_VERTEX_SIZE, (const GLvoid*)(3 * sizeof(GLfloat)));
+		//glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, 0, 0);
+		glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, 0);
+		glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)(3 * sizeof(GLfloat)));
 		glBindBuffer(GL_ARRAY_BUFFER, NULL);
 
 		GLushort indices[RENDERER_INDICES_SIZE];
@@ -51,6 +55,18 @@ namespace graphics {
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 		m_Buffer = reinterpret_cast<VertexData*>(glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY));
+		//float vert[] = {
+		//	-5.f, -5.f, 0.f,
+		//	5.f, -5.f, 0.f,
+		//	5.f, 5.f, 0.f,
+		//	-5.f, 5.f, 0.f,
+		//};
+
+		//glBufferData(GL_ARRAY_BUFFER, sizeof(vert), vert, GL_STATIC_DRAW);
+
+		//void* ptr = glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+		//CopyMemory(ptr, vert, sizeof(vert));
+		//glUnmapBuffer(GL_ARRAY_BUFFER);
 	}
 
 	void BatchRenderer2D::submit(const Renderable2D* renderable)
@@ -89,6 +105,7 @@ namespace graphics {
 		m_IBO->bind();
 
 		glDrawElements(GL_TRIANGLES, m_IndexCount, GL_UNSIGNED_SHORT, NULL);
+		//glDrawElements(GL_TRIANGLES, m_IndexCount, GL_UNSIGNED_SHORT, nullptr);
 
 		m_IBO->unbind();
 		glBindVertexArray(NULL);

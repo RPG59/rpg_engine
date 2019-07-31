@@ -31,7 +31,7 @@ int main()
 	//shader.SetUniform("u_ModelMatrix", matrix2);
 
 #if BATCH_RENDNRER
-	Sprite sprite(99, 99, 99, 99, float4(.2f, .8f, .8f, 1.f));
+	Sprite sprite(0, 0, 5, 5, float4(.2f, .8f, .8f, 1.f));
 	//Sprite sprite2(-2, -2, 3, 3, float4(.2f, .1f, .8f, 1.f));
 	BatchRenderer2D renderer;
 #else
@@ -53,10 +53,10 @@ int main()
 #endif
 		renderer.submit(&sprite);
 		//renderer.submit(&sprite2);
-		renderer.flush();
 #if BATCH_RENDNRER
 		renderer.end();
 #endif
+		renderer.flush();
 
 		window.update();
 	}
