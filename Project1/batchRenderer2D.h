@@ -2,6 +2,7 @@
 
 #include <cstddef>	
 
+#include "renderable2d.h"
 #include "renderer2d.h"
 #include "indexBuffer.h"
 

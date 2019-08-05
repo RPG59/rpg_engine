@@ -68,19 +68,19 @@ namespace graphics {
 
 		const uint32_t packedColor = a << 24 | b << 16 | g << 8 | r;
 
-		m_Buffer->vertices = position;
+		m_Buffer->vertices = float4x4::createMultiply(*m_TransformationBack, position);
 		m_Buffer->color = packedColor;
 		m_Buffer++;
 
-		m_Buffer->vertices = float3(position.x, position.y + size.y, position.z);
+		m_Buffer->vertices = float4x4::createMultiply(*m_TransformationBack, float3(position.x, position.y + size.y, position.z));
 		m_Buffer->color = packedColor;
 		m_Buffer++;
 
-		m_Buffer->vertices = float3(position.x + size.x, position.y + size.y, position.z);
+		m_Buffer->vertices = float4x4::createMultiply(*m_TransformationBack, float3(position.x + size.x, position.y + size.y, position.z));
 		m_Buffer->color = packedColor;
 		m_Buffer++;
 
-		m_Buffer->vertices = float3(position.x + size.x, position.y, position.z);
+		m_Buffer->vertices = float4x4::createMultiply(*m_TransformationBack, float3(position.x + size.x, position.y, position.z));
 		m_Buffer->color = packedColor;
 		m_Buffer++;
 

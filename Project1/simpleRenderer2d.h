@@ -3,6 +3,7 @@
 #include <deque>
 #include "renderer2d.h"
 #include "static_sprite.h"
+#include "renderable2d.h"
 
 namespace graphics {
 	class SimpleRenderer2D : public Renderer2D {

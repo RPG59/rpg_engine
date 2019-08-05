@@ -135,6 +135,7 @@
   <ItemGroup>
     <ClCompile Include="batchRenderer2D.cpp" />
     <ClCompile Include="buffer.cpp" />
+    <ClCompile Include="group.cpp" />
     <ClCompile Include="indexBuffer.cpp" />
     <ClCompile Include="layer.cpp" />
     <ClCompile Include="main.cpp" />
@@ -149,6 +150,7 @@
   <ItemGroup>
     <ClInclude Include="batchRenderer2D.h" />
     <ClInclude Include="buffer.h" />
+    <ClInclude Include="group.h" />
     <ClInclude Include="indexBuffer.h" />
     <ClInclude Include="layer.h" />
     <ClInclude Include="renderable2d.h" />

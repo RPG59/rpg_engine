@@ -3,6 +3,7 @@
 #include "VertexArray.h"
 #include "indexBuffer.h"
 #include "shader.h"
+#include "renderer2d.h"
 
 namespace graphics {
 
@@ -17,6 +18,8 @@ namespace graphics {
 		float3 m_Position;
 		float2 m_Size;
 		float4 m_Color;
+	protected:
+		Renderable2D() {}
 	public:
 		Renderable2D(float3 position, float2 size, float4 color)
 			:m_Position(position), m_Color(color), m_Size(size)
@@ -27,6 +30,11 @@ namespace graphics {
 		virtual ~Renderable2D()
 		{
 
+		}
+
+		virtual void submit(Renderer2D* renderer)
+		{
+			renderer->submit(this);
 		}
 
 		inline const float3& getPosition() const { return m_Position; }

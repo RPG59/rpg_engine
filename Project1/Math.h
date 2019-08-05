@@ -121,4 +121,14 @@ struct float4x4 {
 		}
 		CopyMemory(elements, result, sizeof(float) * 4 * 4);
 	}
+
+	static float3 createMultiply(const float4x4& mat, const float3& vec)
+	{
+		float3 res;
+		res.x = mat.elements[0 + 0] * vec.x + mat.elements[0 + 1] * vec.y + mat.elements[0 + 2] * vec.z + mat.elements[0 + 3];
+		res.y = mat.elements[4 + 0] * vec.x + mat.elements[4 + 1] * vec.y + mat.elements[4 + 2] * vec.z + mat.elements[4 + 3];
+		res.z = mat.elements[8 + 0] * vec.x + mat.elements[8 + 1] * vec.y + mat.elements[8 + 2] * vec.z + mat.elements[8 + 3];
+
+		return res;
+	}
 };
