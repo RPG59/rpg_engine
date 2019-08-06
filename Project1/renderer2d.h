@@ -2,8 +2,7 @@
 
 #include <vector>
 #include <GLEW/glew.h>
-
-#include "Math.h"
+#include <glm/mat4x4.hpp>
 
 
 
@@ -11,25 +10,23 @@ namespace graphics {
 	class Renderable2D;
 	class Renderer2D {
 	protected:
-		std::vector<float4x4> m_TransformationStack;
-		float4x4* m_TransformationBack;
+		std::vector<glm::mat4x4> m_TransformationStack;
+		glm::mat4x4* m_TransformationBack;
 	protected:
 		Renderer2D()
 		{
-			float4x4 mat;
-			mat.identity();
+			glm::mat4x4 mat(1.f);
 			m_TransformationStack.push_back(mat);
 			m_TransformationBack = &m_TransformationStack.back();
 		}
 	public:
-		void push(float4x4 matrix, bool isOverride = false)
+		void push(glm::mat4x4 matrix, bool isOverride = false)
 		{
 			if (isOverride)
 				m_TransformationStack.push_back(matrix);
 			else
 			{
-				float4x4 mat = m_TransformationStack.back();
-				mat.multiply(matrix);
+				glm::mat4x4 mat = m_TransformationStack.back() * matrix;
 				m_TransformationStack.push_back(mat);
 			}
 			m_TransformationBack = &m_TransformationStack.back();

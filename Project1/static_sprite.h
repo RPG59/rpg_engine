@@ -1,5 +1,9 @@
 #pragma once
 
+#include <glm/vec4.hpp>
+#include <glm/vec3.hpp>
+#include <glm/vec2.hpp>
+
 #include "renderable2d.h"
 
 namespace graphics {
@@ -10,7 +14,7 @@ namespace graphics {
 		IndexBuffer* m_IndexBuffer;
 		Shader& m_Shader;
 	public:
-		StaticSprite(float x, float y, float width, float height, float4 color, Shader& shader);
+		StaticSprite(float x, float y, float width, float height, glm::vec4 color, Shader& shader);
 		~StaticSprite();
 
 

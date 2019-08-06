@@ -124,10 +124,15 @@ struct float4x4 {
 
 	static float3 createMultiply(const float4x4& mat, const float3& vec)
 	{
+		float tmp;
 		float3 res;
 		res.x = mat.elements[0 + 0] * vec.x + mat.elements[0 + 1] * vec.y + mat.elements[0 + 2] * vec.z + mat.elements[0 + 3];
 		res.y = mat.elements[4 + 0] * vec.x + mat.elements[4 + 1] * vec.y + mat.elements[4 + 2] * vec.z + mat.elements[4 + 3];
 		res.z = mat.elements[8 + 0] * vec.x + mat.elements[8 + 1] * vec.y + mat.elements[8 + 2] * vec.z + mat.elements[8 + 3];
+		tmp = mat.elements[12 + 0] * vec.x + mat.elements[12 + 1] * vec.y + mat.elements[12 + 2] * vec.z + mat.elements[12 + 3];
+		res.x = res.x / tmp;
+		res.y = res.y / tmp;
+		res.z = res.z / tmp;
 
 		return res;
 	}

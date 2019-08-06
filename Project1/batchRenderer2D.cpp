@@ -57,9 +57,9 @@ namespace graphics {
 
 	void BatchRenderer2D::submit(const Renderable2D* renderable)
 	{
-		const float3& position = renderable->getPosition();
-		const float4& color = renderable->getColor();
-		const float2& size = renderable->getSize();
+		const glm::vec3& position = renderable->getPosition();
+		const glm::vec4& color = renderable->getColor();
+		const glm::vec2& size = renderable->getSize();
 
 		uint8_t r = color.x * 255.f;
 		uint8_t g = color.y * 255.f;
@@ -68,19 +68,30 @@ namespace graphics {
 
 		const uint32_t packedColor = a << 24 | b << 16 | g << 8 | r;
 
-		m_Buffer->vertices = float4x4::createMultiply(*m_TransformationBack, position);
+		//m_Buffer->vertices = glm::vec3(tmp.x, tmp.y, tmp.z);
+		//m_Buffer->vertices = glm::vec3(tmp.x / tmp.w, tmp.y / tmp.w, tmp.z / tmp.w);
+		glm::vec4 tmp(position.x, position.y, position.z, 1);
+		tmp = *m_TransformationBack * tmp;
+
+		//m_Buffer->vertices = glm::vec3(tmp.x, tmp.y, tmp.z);
+		m_Buffer->vertices = glm::vec3(tmp.x / tmp.w, tmp.y / tmp.w, tmp.z / tmp.w);
 		m_Buffer->color = packedColor;
 		m_Buffer++;
 
-		m_Buffer->vertices = float4x4::createMultiply(*m_TransformationBack, float3(position.x, position.y + size.y, position.z));
+		tmp = *m_TransformationBack * glm::vec4(position.x, position.y + size.y, position.z, 1);
+		m_Buffer->vertices = glm::vec3(tmp.x / tmp.w, tmp.y / tmp.w, tmp.z / tmp.w);
 		m_Buffer->color = packedColor;
 		m_Buffer++;
 
-		m_Buffer->vertices = float4x4::createMultiply(*m_TransformationBack, float3(position.x + size.x, position.y + size.y, position.z));
+		tmp = *m_TransformationBack * glm::vec4(position.x + size.x, position.y + size.y, position.z, 1);
+		//m_Buffer->vertices = glm::vec3(tmp.x, tmp.y, tmp.z);
+		m_Buffer->vertices = glm::vec3(tmp.x / tmp.w, tmp.y / tmp.w, tmp.z / tmp.w);
 		m_Buffer->color = packedColor;
 		m_Buffer++;
 
-		m_Buffer->vertices = float4x4::createMultiply(*m_TransformationBack, float3(position.x + size.x, position.y, position.z));
+		tmp = *m_TransformationBack * glm::vec4(position.x + size.x, position.y, position.z, 1);
+		//m_Buffer->vertices = glm::vec3(tmp.x, tmp.y, tmp.z);
+		m_Buffer->vertices = glm::vec3(tmp.x / tmp.w, tmp.y / tmp.w, tmp.z / tmp.w);
 		m_Buffer->color = packedColor;
 		m_Buffer++;
 

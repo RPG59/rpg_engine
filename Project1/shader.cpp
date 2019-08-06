@@ -69,19 +69,19 @@ namespace graphics {
 		}
 	}
 
-	void Shader::SetUniform(const char* name, float4x4 matrix)
+	void Shader::SetUniform(const char* name, glm::mat4x4& matrix)
 	{
 		if (!isEnable) Enable();
 		int location = glGetUniformLocation(program, name);
 		if (location != -1) {
-			glUniformMatrix4fv(location, 1, GL_FALSE, matrix.elements);
+			glUniformMatrix4fv(location, 1, GL_FALSE, &matrix[0][0]);
 		}
 		else {
 			std::cout << "Uniform float4x4 Error!" << std::endl;
 		}
 	}
 
-	void Shader::SetUniform(const char* name, float4 vec)
+	void Shader::SetUniform(const char* name, glm::vec4& vec)
 	{
 		if (!isEnable) Enable();
 		int location = glGetUniformLocation(program, name);
@@ -93,7 +93,7 @@ namespace graphics {
 		}
 	}
 
-	void Shader::SetUniform(const char* name, float3 vec)
+	void Shader::SetUniform(const char* name, glm::vec3& vec)
 	{
 		if (!isEnable) Enable();
 		int location = glGetUniformLocation(program, name);
@@ -105,7 +105,7 @@ namespace graphics {
 		}
 	}
 
-	void Shader::SetUniform(const char* name, float2 vec)
+	void Shader::SetUniform(const char* name, const glm::vec2& vec)
 	{
 		if (!isEnable) Enable();
 		int location = glGetUniformLocation(program, name);

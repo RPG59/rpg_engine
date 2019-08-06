@@ -11,9 +11,9 @@ namespace graphics {
 		while (!m_RanderQueue.empty())
 		{
 			const StaticSprite* sprite = m_RanderQueue.front();
-			float4x4 matrix;
+			glm::mat4x4 matrix;
 
-			matrix.translate(sprite->getPosition());
+			glm::translate(matrix, sprite->getPosition());
 			sprite->getVAO()->bind();
 			sprite->getIBO()->bind();
 			

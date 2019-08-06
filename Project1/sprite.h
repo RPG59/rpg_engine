@@ -1,5 +1,9 @@
 #pragma once
 
+#include<glm/vec4.hpp>
+#include<glm/vec3.hpp>
+#include<glm/vec2.hpp>
+
 #include "renderable2d.h"
 
 namespace graphics {
@@ -8,7 +12,7 @@ namespace graphics {
 	private:
 
 	public:
-		Sprite(float x, float y, float width, float height, float4 color);
+		Sprite(float x, float y, float width, float height, glm::vec4 color);
 
 	};
 }

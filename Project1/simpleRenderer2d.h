@@ -1,6 +1,9 @@
 #pragma once
 
 #include <deque>
+#include <glm/mat4x4.hpp>
+#include <glm/ext/matrix_transform.hpp>
+
 #include "renderer2d.h"
 #include "static_sprite.h"
 #include "renderable2d.h"

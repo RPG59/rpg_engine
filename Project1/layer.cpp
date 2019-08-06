@@ -1,7 +1,7 @@
 #include "layer.h"
 
 namespace graphics {
-	Layer::Layer(Renderer2D* renderer, Shader* shader, float4x4 projectionMatrix) 
+	Layer::Layer(Renderer2D* renderer, Shader* shader, glm::mat4x4 projectionMatrix) 
 		: m_Renderer(renderer), m_Shader(shader), m_ProjectionMatrix(projectionMatrix)
 	{
 		m_Shader->Enable();

@@ -1,8 +1,8 @@
 #include "sprite.h"
 
 namespace graphics {
-	Sprite::Sprite(float x, float y, float width, float height, float4 color)
-		: Renderable2D(float3(x, y, 0), float2(width, height), color)
+	Sprite::Sprite(float x, float y, float width, float height, glm::vec4 color)
+		: Renderable2D(glm::vec3(x, y, 0), glm::vec2(width, height), color)
 	{
 
 	}

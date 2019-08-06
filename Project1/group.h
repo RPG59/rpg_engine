@@ -1,5 +1,6 @@
 #pragma once
 
+#include <glm/mat4x4.hpp>
 #include "renderable2d.h"
 
 namespace graphics {
@@ -7,9 +8,9 @@ namespace graphics {
 	{
 	private:
 		std::vector<Renderable2D*> m_Renderables;
-		float4x4 m_TransformationMatrix;
+		glm::mat4x4 m_TransformationMatrix;
 	public:
-		Group(float4x4& matrix);
+		Group(glm::mat4x4& matrix);
 		void submit(Renderer2D* renderer) override;
 		void add(Renderable2D* renderable);
 	};

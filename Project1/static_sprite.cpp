@@ -1,8 +1,8 @@
 #include "static_sprite.h"
 
 namespace graphics {
-	StaticSprite::StaticSprite(float x, float y, float width, float height, float4 color, Shader& shader)
-		:Renderable2D(float3(x, y, 0), float2(width, height), color), m_Shader(shader)
+	StaticSprite::StaticSprite(float x, float y, float width, float height, glm::vec4 color, Shader& shader)
+		:Renderable2D(glm::vec3(x, y, 0), glm::vec2(width, height), color), m_Shader(shader)
 	{
 		
 			m_VertexArray = new VertexArray();

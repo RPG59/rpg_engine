@@ -3,7 +3,10 @@
 #include <fstream>
 #include <iostream>
 
-#include "Math.h"
+#include <glm/vec2.hpp>
+#include <glm/vec3.hpp>
+#include <glm/vec4.hpp>
+#include <glm/mat4x4.hpp>
 
 #include <GLEW/glew.h>
 
@@ -13,10 +16,10 @@ namespace graphics {
 		Shader() = default;
 		Shader(const char* vsPath, const char* fsPath);
 		void SetUniform(const char*, float x);
-		void SetUniform(const char*, float4x4 vec);
-		void SetUniform(const char*, float2 vec);
-		void SetUniform(const char*, float3 vec);
-		void SetUniform(const char*, float4 vec);
+		void SetUniform(const char*, glm::mat4x4& vec);
+		void SetUniform(const char*, const glm::vec2& vec);
+		void SetUniform(const char*, glm::vec3& vec);
+		void SetUniform(const char*, glm::vec4& vec);
 
 		void Enable();
 		void Disable();

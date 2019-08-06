@@ -13,9 +13,13 @@
 
 #include <time.h>
 
+
+
+
 #pragma comment(lib, "opengl32.lib")
 #pragma comment(lib, "glew32s.lib")
 #pragma comment(lib, "glfw3.lib")
+#pragma comment(lib, "FreeImage.lib")
 
 #define TEST_50K 0
 
@@ -38,15 +42,12 @@ int main()
 		}
 	}
 #else
-	float4x4 rotate;
-	rotate.identity();
-	rotate.rotate(90.f);
-	float4x4 transform;
-	transform.translate(float3(15.f, -5.f, .0f));
-	Group* group = new Group(rotate);
-
-	group->add(new Sprite(0, 0, 6, 3, float4(1, 1, 1, 1)));
-	group->add(new Sprite(.5f, .5f, 5.f, 2.f, float4(1, 0, 1, 1)));
+	glm::mat4x4 transform(1.f);
+	transform = glm::translate(transform, glm::vec3(-5.f, 0.f, 0));
+	transform = glm::rotate(transform, 45.f, glm::vec3(0.f, 0.f, 1.f));
+	Group* group = new Group(transform);
+	group->add(new Sprite(0, 0, 6, 3, glm::vec4(1, 1, 1, 1)));
+	group->add(new Sprite(.5f, .5f, 5.f, 2.f, glm::vec4(1, 0, 1, 1)));
 
 	layer.add(group);
 
@@ -58,7 +59,7 @@ int main()
 		window.clear();
 		double x, y;
 		Window::getMousePosition(x, y);
-		shader->SetUniform("light_pos", float2((float)(x * 32.f / 1024.f - 16.f), (float)(y * 18.f / 576.f - 9.f)));
+		shader->SetUniform("light_pos", glm::vec2((float)(x * 32.f / 1024.f - 16.f), (float)(18.f - y * 18.f / 576.f - 9.f)));
 
 		layer.render();
 		

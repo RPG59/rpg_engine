@@ -1,7 +1,7 @@
 #include "group.h"
 
 namespace graphics {
-	Group::Group(float4x4& matrix)
+	Group::Group(glm::mat4x4& matrix)
 		: m_TransformationMatrix(matrix)
 	{
 

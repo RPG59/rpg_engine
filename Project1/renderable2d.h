@@ -1,5 +1,10 @@
 #pragma once
-#include "Math.h"
+
+#include <glm/vec2.hpp>
+#include <glm/vec3.hpp>
+#include <glm/vec4.hpp>
+#include <glm/mat4x4.hpp>
+
 #include "VertexArray.h"
 #include "indexBuffer.h"
 #include "shader.h"
@@ -9,19 +14,19 @@ namespace graphics {
 
 	struct VertexData
 	{
-		float3 vertices;
+		glm::vec3 vertices;
 		uint32_t color;
 	};
 
 	class Renderable2D {
 	protected:
-		float3 m_Position;
-		float2 m_Size;
-		float4 m_Color;
+		glm::vec3 m_Position;
+		glm::vec2 m_Size;
+		glm::vec4 m_Color;
 	protected:
 		Renderable2D() {}
 	public:
-		Renderable2D(float3 position, float2 size, float4 color)
+		Renderable2D(glm::vec3 position, glm::vec2 size, glm::vec4 color)
 			:m_Position(position), m_Color(color), m_Size(size)
 		{
 
@@ -37,8 +42,8 @@ namespace graphics {
 			renderer->submit(this);
 		}
 
-		inline const float3& getPosition() const { return m_Position; }
-		inline const float2& getSize() const { return m_Size; }
-		inline const float4& getColor() const { return m_Color; }
+		inline const glm::vec3& getPosition() const { return m_Position; }
+		inline const glm::vec2& getSize() const { return m_Size; }
+		inline const glm::vec4& getColor() const { return m_Color; }
 	};
 }
