@@ -9,6 +9,8 @@
 #include "batchRenderer2D.h"
 #include "tileLayer.h"
 
+#include "texture.h"
+
 #include "group.h"
 
 #include <time.h>
@@ -21,7 +23,7 @@
 #pragma comment(lib, "glfw3.lib")
 #pragma comment(lib, "FreeImage.lib")
 
-#define TEST_50K 0
+#define TEST_50K 1
 
 int main()
 {
@@ -34,14 +36,15 @@ int main()
 	TileLayer layer(shader);
 
 #if TEST_50K
-	for (float y = -9.f; y < 9.f; y += .2f)
+	for (float y = -9.f; y < 9.f; y += 1.f)
 	{
-		for (float x = -16.f; x < 16.f; x += .2f)
+		for (float x = -16.f; x < 16.f; x += 1.f)
 		{
-			layer.add(new Sprite(x, y, .9f, .9f, float4(rand() % 1000 / 1000.f, 0, 1.f, 1.f)));
+			layer.add(new Sprite(x, y, .9f, .9f, glm::vec4(rand() % 1000 / 1000.f, 0, 1.f, 1.f)));
 		}
 	}
 #else
+
 	glm::mat4x4 transform(1.f);
 	transform = glm::translate(transform, glm::vec3(-5.f, 0.f, 0));
 	transform = glm::rotate(transform, 45.f, glm::vec3(0.f, 0.f, 1.f));
@@ -52,15 +55,21 @@ int main()
 	layer.add(group);
 
 #endif
+	glActiveTexture(GL_TEXTURE0);
+	std::string path = "../test.png";
+	Texture texture(path);
+	texture.bind();
 
+	shader->Enable();
+	shader->SetUniform("tex", 0);
 
 	while (!window.isClosed())
 	{
 		window.clear();
+		shader->Enable();
 		double x, y;
 		Window::getMousePosition(x, y);
 		shader->SetUniform("light_pos", glm::vec2((float)(x * 32.f / 1024.f - 16.f), (float)(18.f - y * 18.f / 576.f - 9.f)));
-
 		layer.render();
 		
 		window.update();

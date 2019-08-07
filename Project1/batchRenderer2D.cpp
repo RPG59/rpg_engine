@@ -24,8 +24,10 @@ namespace graphics {
 
 		glBufferData(GL_ARRAY_BUFFER, RENDERER_BUFFER_SIZE, NULL, GL_DYNAMIC_DRAW);
 		glEnableVertexAttribArray(SHADER_VERTEX_INDEX);
+		glEnableVertexAttribArray(SHADER_TEXTURE_COORD_INDEX);
 		glEnableVertexAttribArray(SHADER_COLOR_INDEX);
 		glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, 0);
+		glVertexAttribPointer(SHADER_COLOR_INDEX, 2, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const void*)offsetof(VertexData, VertexData::texCoord));
 		glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_UNSIGNED_BYTE, GL_TRUE, RENDERER_VERTEX_SIZE, (const void*)offsetof(VertexData, VertexData::color));
 		glBindBuffer(GL_ARRAY_BUFFER, NULL);
 
@@ -46,7 +48,7 @@ namespace graphics {
 		}
 
 		m_IBO = new IndexBuffer(indices, RENDERER_INDICES_SIZE);
-		glBindVertexArray(NULL);     
+		glBindVertexArray(NULL);
 	}
 
 	void BatchRenderer2D::begin()
@@ -60,6 +62,7 @@ namespace graphics {
 		const glm::vec3& position = renderable->getPosition();
 		const glm::vec4& color = renderable->getColor();
 		const glm::vec2& size = renderable->getSize();
+		const std::vector<glm::vec2>& textureCoord = renderable->getTextureCoord();
 
 		uint8_t r = color.x * 255.f;
 		uint8_t g = color.y * 255.f;
@@ -75,23 +78,27 @@ namespace graphics {
 
 		//m_Buffer->vertices = glm::vec3(tmp.x, tmp.y, tmp.z);
 		m_Buffer->vertices = glm::vec3(tmp.x / tmp.w, tmp.y / tmp.w, tmp.z / tmp.w);
+		m_Buffer->texCoord = textureCoord[0];
 		m_Buffer->color = packedColor;
 		m_Buffer++;
 
 		tmp = *m_TransformationBack * glm::vec4(position.x, position.y + size.y, position.z, 1);
 		m_Buffer->vertices = glm::vec3(tmp.x / tmp.w, tmp.y / tmp.w, tmp.z / tmp.w);
+		m_Buffer->texCoord = textureCoord[1];
 		m_Buffer->color = packedColor;
 		m_Buffer++;
 
 		tmp = *m_TransformationBack * glm::vec4(position.x + size.x, position.y + size.y, position.z, 1);
 		//m_Buffer->vertices = glm::vec3(tmp.x, tmp.y, tmp.z);
 		m_Buffer->vertices = glm::vec3(tmp.x / tmp.w, tmp.y / tmp.w, tmp.z / tmp.w);
+		m_Buffer->texCoord = textureCoord[2];
 		m_Buffer->color = packedColor;
 		m_Buffer++;
 
 		tmp = *m_TransformationBack * glm::vec4(position.x + size.x, position.y, position.z, 1);
 		//m_Buffer->vertices = glm::vec3(tmp.x, tmp.y, tmp.z);
 		m_Buffer->vertices = glm::vec3(tmp.x / tmp.w, tmp.y / tmp.w, tmp.z / tmp.w);
+		m_Buffer->texCoord = textureCoord[3];
 		m_Buffer->color = packedColor;
 		m_Buffer++;
 
