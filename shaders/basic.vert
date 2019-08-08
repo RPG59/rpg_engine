@@ -16,10 +16,10 @@ out DATA
 
 void main()
 {
-	gl_Position = u_ProjectionMatrix * u_ModelMatrix * position;
-    vs_out.textureCoord = l_textureCoord;
-    vs_out.position = u_ModelMatrix * position;
-    vs_out.color = l_color;
+   gl_Position = u_ProjectionMatrix * u_ModelMatrix * position;
+   vs_out.textureCoord = l_textureCoord;
+   vs_out.position = u_ModelMatrix * position;
+   vs_out.color = l_color;
   
 }
 

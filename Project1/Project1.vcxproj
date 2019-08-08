@@ -71,7 +71,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(SolutionDir)dep/include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Dev\__GRAPHICS__\rpg_engine\dep\src\freeImage;$(SolutionDir)dep\src\GLFW;$(SolutionDir)dep\src\GLEW;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)dep\src\freeImage;$(SolutionDir)dep\src\GLFW;$(SolutionDir)dep\src\GLEW;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>C:\Users\KanshinIS\__LIB\graphics\glfw-3.3.bin.WIN32\include\GLFW;C:\Users\KanshinIS\__LIB\graphics\glew-2.1.0\include\GL;$(IncludePath)</IncludePath>
