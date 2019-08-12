@@ -1,6 +1,6 @@
 #pragma once
 
-#include <glm/mat4x4.hpp>
+#include <mat4x4.hpp>
 #include "renderable2d.h"
 #include "renderer2d.h"
 

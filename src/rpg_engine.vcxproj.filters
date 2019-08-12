@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="core">
+      <UniqueIdentifier>{4E40957C-3A77-960D-E363-7C10CF79120F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\graphics">
+      <UniqueIdentifier>{6EDCE3F6-DA9C-5F2D-A3D7-A8AA0F57A409}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="rpg_engine\core\graphics\VertexArray.h">
+      <Filter>core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="rpg_engine\core\graphics\batchRenderer2D.h">
+      <Filter>core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="rpg_engine\core\graphics\buffer.h">
+      <Filter>core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="rpg_engine\core\graphics\group.h">
+      <Filter>core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="rpg_engine\core\graphics\imageLoader.h">
+      <Filter>core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="rpg_engine\core\graphics\indexBuffer.h">
+      <Filter>core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="rpg_engine\core\graphics\layer.h">
+      <Filter>core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="rpg_engine\core\graphics\renderable2d.h">
+      <Filter>core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="rpg_engine\core\graphics\renderer2d.h">
+      <Filter>core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="rpg_engine\core\graphics\shader.h">
+      <Filter>core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="rpg_engine\core\graphics\simpleRenderer2d.h">
+      <Filter>core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="rpg_engine\core\graphics\sprite.h">
+      <Filter>core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="rpg_engine\core\graphics\static_sprite.h">
+      <Filter>core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="rpg_engine\core\graphics\texture.h">
+      <Filter>core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="rpg_engine\core\graphics\tileLayer.h">
+      <Filter>core\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="rpg_engine\core\window.h">
+      <Filter>core</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="rpg_engine\core\graphics\VertexArray.cpp">
+      <Filter>core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="rpg_engine\core\graphics\batchRenderer2D.cpp">
+      <Filter>core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="rpg_engine\core\graphics\buffer.cpp">
+      <Filter>core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="rpg_engine\core\graphics\group.cpp">
+      <Filter>core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="rpg_engine\core\graphics\indexBuffer.cpp">
+      <Filter>core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="rpg_engine\core\graphics\layer.cpp">
+      <Filter>core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="rpg_engine\core\graphics\shader.cpp">
+      <Filter>core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="rpg_engine\core\graphics\simpleRenderer2d.cpp">
+      <Filter>core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="rpg_engine\core\graphics\sprite.cpp">
+      <Filter>core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="rpg_engine\core\graphics\static_sprite.cpp">
+      <Filter>core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="rpg_engine\core\graphics\texture.cpp">
+      <Filter>core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="rpg_engine\core\graphics\tieLayer.cpp">
+      <Filter>core\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="rpg_engine\core\window.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="rpg_engine\main.cpp" />
+  </ItemGroup>
+</Project>

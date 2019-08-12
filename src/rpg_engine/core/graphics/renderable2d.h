@@ -1,14 +1,15 @@
 #pragma once
 
-#include <glm/vec2.hpp>
-#include <glm/vec3.hpp>
-#include <glm/vec4.hpp>
-#include <glm/mat4x4.hpp>
+#include <vec2.hpp>
+#include <vec3.hpp>
+#include <vec4.hpp>
+#include <mat4x4.hpp>
 
 #include "VertexArray.h"
 #include "indexBuffer.h"
 #include "shader.h"
 #include "renderer2d.h"
+#include "texture.h"
 
 namespace graphics {
 
@@ -17,6 +18,7 @@ namespace graphics {
 		glm::vec3 vertices;
 		glm::vec2 texCoord;
 		uint32_t color;
+		float tid;
 	};
 
 	class Renderable2D {
@@ -25,6 +27,7 @@ namespace graphics {
 		glm::vec2 m_Size;
 		glm::vec4 m_Color;
 		std::vector<glm::vec2> m_TextureCoord;
+		Texture* m_Texture;
 	protected:
 		Renderable2D()
 		{
@@ -51,6 +54,7 @@ namespace graphics {
 		inline const glm::vec2& getSize() const { return m_Size; }
 		inline const glm::vec4& getColor() const { return m_Color; }
 		inline const std::vector<glm::vec2>& getTextureCoord() const { return m_TextureCoord; }
+		inline const GLuint getTID() const { return m_Texture == nullptr ? 0 : m_Texture->getID(); }
 
 	private:
 		void setDefaultTextureCoord()

@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Dist|Win32">
+      <Configuration>Dist</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C3F9C68B-AFB1-08D9-18B9-E1340490A3C9}</ProjectGuid>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>rpg_engine</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Dist|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\bin\Debug-windows-x86\rpg_engine\</OutDir>
+    <IntDir>..\bin-int\Debug-windows-x86\rpg_engine\</IntDir>
+    <TargetName>rpg_engine</TargetName>
+    <TargetExt>.exe</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\bin\Release-windows-x86\rpg_engine\</OutDir>
+    <IntDir>..\bin-int\Release-windows-x86\rpg_engine\</IntDir>
+    <TargetName>rpg_engine</TargetName>
+    <TargetExt>.exe</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\bin\Dist-windows-x86\rpg_engine\</OutDir>
+    <IntDir>..\bin-int\Dist-windows-x86\rpg_engine\</IntDir>
+    <TargetName>rpg_engine</TargetName>
+    <TargetExt>.exe</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>GLEW_STATIC;BUILD_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\dep\include\freeImage;..\dep\include\GLEW;..\dep\include\GLFW;..\dep\include\glm;..\dep\include\glm\detail;..\dep\include\glm\ext;..\dep\include\glm\gtc;..\dep\include\glm\gtx;..\dep\include\glm\simd;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32s.lib;FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\dep\src\freeImage;..\dep\src\GLEW;..\dep\src\GLFW;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>GLEW_STATIC;BUILD_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\dep\include\freeImage;..\dep\include\GLEW;..\dep\include\GLFW;..\dep\include\glm;..\dep\include\glm\detail;..\dep\include\glm\ext;..\dep\include\glm\gtc;..\dep\include\glm\gtx;..\dep\include\glm\simd;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32s.lib;FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\dep\src\freeImage;..\dep\src\GLEW;..\dep\src\GLFW;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>GLEW_STATIC;BUILD_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\dep\include\freeImage;..\dep\include\GLEW;..\dep\include\GLFW;..\dep\include\glm;..\dep\include\glm\detail;..\dep\include\glm\ext;..\dep\include\glm\gtc;..\dep\include\glm\gtx;..\dep\include\glm\simd;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32s.lib;FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\dep\src\freeImage;..\dep\src\GLEW;..\dep\src\GLFW;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="rpg_engine\core\graphics\VertexArray.h" />
+    <ClInclude Include="rpg_engine\core\graphics\batchRenderer2D.h" />
+    <ClInclude Include="rpg_engine\core\graphics\buffer.h" />
+    <ClInclude Include="rpg_engine\core\graphics\group.h" />
+    <ClInclude Include="rpg_engine\core\graphics\imageLoader.h" />
+    <ClInclude Include="rpg_engine\core\graphics\indexBuffer.h" />
+    <ClInclude Include="rpg_engine\core\graphics\layer.h" />
+    <ClInclude Include="rpg_engine\core\graphics\renderable2d.h" />
+    <ClInclude Include="rpg_engine\core\graphics\renderer2d.h" />
+    <ClInclude Include="rpg_engine\core\graphics\shader.h" />
+    <ClInclude Include="rpg_engine\core\graphics\simpleRenderer2d.h" />
+    <ClInclude Include="rpg_engine\core\graphics\sprite.h" />
+    <ClInclude Include="rpg_engine\core\graphics\static_sprite.h" />
+    <ClInclude Include="rpg_engine\core\graphics\texture.h" />
+    <ClInclude Include="rpg_engine\core\graphics\tileLayer.h" />
+    <ClInclude Include="rpg_engine\core\window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="rpg_engine\core\graphics\VertexArray.cpp" />
+    <ClCompile Include="rpg_engine\core\graphics\batchRenderer2D.cpp" />
+    <ClCompile Include="rpg_engine\core\graphics\buffer.cpp" />
+    <ClCompile Include="rpg_engine\core\graphics\group.cpp" />
+    <ClCompile Include="rpg_engine\core\graphics\indexBuffer.cpp" />
+    <ClCompile Include="rpg_engine\core\graphics\layer.cpp" />
+    <ClCompile Include="rpg_engine\core\graphics\shader.cpp" />
+    <ClCompile Include="rpg_engine\core\graphics\simpleRenderer2d.cpp" />
+    <ClCompile Include="rpg_engine\core\graphics\sprite.cpp" />
+    <ClCompile Include="rpg_engine\core\graphics\static_sprite.cpp" />
+    <ClCompile Include="rpg_engine\core\graphics\texture.cpp" />
+    <ClCompile Include="rpg_engine\core\graphics\tieLayer.cpp" />
+    <ClCompile Include="rpg_engine\core\window.cpp" />
+    <ClCompile Include="rpg_engine\main.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include <freeImage/FreeImage.h>
+#include <FreeImage.h>
 
 static BYTE* loadImage(const char* path, GLsizei* widht, GLsizei* height)
 {

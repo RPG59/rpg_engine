@@ -1,10 +1,10 @@
 #pragma once
 
 #include <cstddef>	
-#include <glm/vec2.hpp>
-#include <glm/vec3.hpp>
-#include <glm/vec4.hpp>
-#include <glm/mat4x4.hpp>
+#include <vec2.hpp>
+#include <vec3.hpp>
+#include <vec4.hpp>
+#include <mat4x4.hpp>
 
 #include "renderable2d.h"
 #include "renderer2d.h"
@@ -20,7 +20,8 @@ namespace graphics {
 
 #define SHADER_VERTEX_INDEX 0
 #define SHADER_TEXTURE_COORD_INDEX 1
-#define SHADER_COLOR_INDEX 2
+#define SHADER_TID_INDEX 2
+#define SHADER_COLOR_INDEX 3
 
 	class BatchRenderer2D : public Renderer2D {
 	private:
@@ -29,6 +30,8 @@ namespace graphics {
 		VertexData* m_Buffer = nullptr;
 		IndexBuffer* m_IBO = nullptr;
 		GLsizei m_IndexCount = NULL;
+
+		std::vector<GLuint> m_TextureSlots;
 	public:
 		BatchRenderer2D();
 		~BatchRenderer2D();

@@ -25,9 +25,11 @@ namespace graphics {
 		glBufferData(GL_ARRAY_BUFFER, RENDERER_BUFFER_SIZE, NULL, GL_DYNAMIC_DRAW);
 		glEnableVertexAttribArray(SHADER_VERTEX_INDEX);
 		glEnableVertexAttribArray(SHADER_TEXTURE_COORD_INDEX);
+		glEnableVertexAttribArray(SHADER_TID_INDEX);
 		glEnableVertexAttribArray(SHADER_COLOR_INDEX);
 		glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, 0);
 		glVertexAttribPointer(SHADER_TEXTURE_COORD_INDEX, 2, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const void*)offsetof(VertexData, VertexData::texCoord));
+		glVertexAttribPointer(SHADER_TID_INDEX, 1, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const void*)offsetof(VertexData, VertexData::tid));
 		glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_UNSIGNED_BYTE, GL_TRUE, RENDERER_VERTEX_SIZE, (const void*)offsetof(VertexData, VertexData::color));
 		glBindBuffer(GL_ARRAY_BUFFER, NULL);
 
@@ -63,13 +65,46 @@ namespace graphics {
 		const glm::vec4& color = renderable->getColor();
 		const glm::vec2& size = renderable->getSize();
 		const std::vector<glm::vec2>& textureCoord = renderable->getTextureCoord();
+		const GLuint tid = renderable->getTID();
 
-		uint8_t r = color.x * 255.f;
-		uint8_t g = color.y * 255.f;
-		uint8_t b = color.z * 255.f;
-		uint8_t a = color.w * 255.f;
+		uint32_t packedColor = 0;
+		float ts = .0f;
 
-		const uint32_t packedColor = a << 24 | b << 16 | g << 8 | r;
+		if (tid > 0)
+		{
+			bool found = false;
+			for (int i = 0; i < m_TextureSlots.size(); ++i)
+			{
+				if (m_TextureSlots[i] == tid)
+				{
+					ts = (float)(i + 1);
+					found = true;
+					break;
+				}
+			}
+
+			if (!found)
+			{
+				if (m_TextureSlots.size() >= 32)
+				{
+					end();
+					flush();
+					begin();
+				}
+				m_TextureSlots.push_back(tid);
+				ts = (float)(m_TextureSlots.size());
+			}
+		}
+		else
+		{
+			uint8_t r = color.x * 255.f;
+			uint8_t g = color.y * 255.f;
+			uint8_t b = color.z * 255.f;
+			uint8_t a = color.w * 255.f;
+
+			packedColor = a << 24 | b << 16 | g << 8 | r;
+
+		}
 
 		//m_Buffer->vertices = glm::vec3(tmp.x, tmp.y, tmp.z);
 		//m_Buffer->vertices = glm::vec3(tmp.x / tmp.w, tmp.y / tmp.w, tmp.z / tmp.w);
@@ -79,12 +114,14 @@ namespace graphics {
 		//m_Buffer->vertices = glm::vec3(tmp.x, tmp.y, tmp.z);
 		m_Buffer->vertices = glm::vec3(tmp.x / tmp.w, tmp.y / tmp.w, tmp.z / tmp.w);
 		m_Buffer->texCoord = textureCoord[0];
+		m_Buffer->tid = ts;
 		m_Buffer->color = packedColor;
 		m_Buffer++;
 
 		tmp = *m_TransformationBack * glm::vec4(position.x, position.y + size.y, position.z, 1);
 		m_Buffer->vertices = glm::vec3(tmp.x / tmp.w, tmp.y / tmp.w, tmp.z / tmp.w);
 		m_Buffer->texCoord = textureCoord[1];
+		m_Buffer->tid = ts;
 		m_Buffer->color = packedColor;
 		m_Buffer++;
 
@@ -92,6 +129,7 @@ namespace graphics {
 		//m_Buffer->vertices = glm::vec3(tmp.x, tmp.y, tmp.z);
 		m_Buffer->vertices = glm::vec3(tmp.x / tmp.w, tmp.y / tmp.w, tmp.z / tmp.w);
 		m_Buffer->texCoord = textureCoord[2];
+		m_Buffer->tid = ts;
 		m_Buffer->color = packedColor;
 		m_Buffer++;
 
@@ -99,6 +137,7 @@ namespace graphics {
 		//m_Buffer->vertices = glm::vec3(tmp.x, tmp.y, tmp.z);
 		m_Buffer->vertices = glm::vec3(tmp.x / tmp.w, tmp.y / tmp.w, tmp.z / tmp.w);
 		m_Buffer->texCoord = textureCoord[3];
+		m_Buffer->tid = ts;
 		m_Buffer->color = packedColor;
 		m_Buffer++;
 
@@ -112,6 +151,12 @@ namespace graphics {
 
 	void BatchRenderer2D::flush()
 	{
+		for (int i = 0; i < m_TextureSlots.size(); ++i)
+		{
+			glActiveTexture(GL_TEXTURE0 + i);
+			glBindTexture(GL_TEXTURE_2D, m_TextureSlots[i]);
+		}
+			
 		glBindVertexArray(m_VAO);
 		m_IBO->bind();
 

@@ -1,8 +1,8 @@
 #pragma once
 
 #include <vector>
-#include <GLEW/glew.h>
-#include <glm/mat4x4.hpp>
+#include <glew.h>
+#include <mat4x4.hpp>
 
 
 

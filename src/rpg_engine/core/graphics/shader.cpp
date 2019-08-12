@@ -20,6 +20,11 @@ namespace graphics {
 		glDeleteShader(fsId);
 	}
 
+	Shader::~Shader()
+	{
+		glDeleteProgram(program);
+	}
+
 	std::string Shader::LoadShader(const char* shaderPath) {
 		std::fstream file(shaderPath);
 		std::string result((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
@@ -114,6 +119,30 @@ namespace graphics {
 		}
 		else {
 			std::cout << "Uniform float2 Error!" << std::endl;
+		}
+	}
+
+	void Shader::SetUniform(const char* name, int32_t count, float* pVal)
+	{
+		if (!isEnable) Enable();
+		int location = glGetUniformLocation(program, name);
+		if (location != -1) {
+			glUniform1fv(location, count, pVal);
+		}
+		else {
+			std::cout << "Uniform float* Error!" << std::endl;
+		}
+	}
+
+	void Shader::SetUniform(const char* name, int32_t count, int32_t* pVal)
+	{
+		if (!isEnable) Enable();
+		int location = glGetUniformLocation(program, name);
+		if (location != -1) {
+			glUniform1iv(location, count, pVal);
+		}
+		else {
+			std::cout << "Uniform int* Error!" << std::endl;
 		}
 	}
 
