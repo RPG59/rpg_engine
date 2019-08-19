@@ -27,7 +27,7 @@ namespace graphics {
 		glm::vec2 m_Size;
 		glm::vec4 m_Color;
 		std::vector<glm::vec2> m_TextureCoord;
-		Texture* m_Texture;
+		Texture* m_Texture = nullptr;
 	protected:
 		Renderable2D()
 		{

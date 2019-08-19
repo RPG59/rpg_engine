@@ -57,6 +57,7 @@ project "rpg_engine"
 			-- ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/"),
 			-- "copy dep/src/freeImage/FreeImage.dll /bin/" .. outputdir .. "/%{prj.name}/"
 			-- "copy dep\\src\\freeImage\\FreeImage.dll bin\\Debug-windows-x86\\rpg_engine\\"
+			"copy \"$(SolutionDir)dep\\src\\freeImage\\FreeImage.dll\" \"$(SolutionDir)bin\\".. outputdir .. "\\%{prj.name}\""
 		}
 	
 	filter "configurations:Debug"

@@ -7,6 +7,10 @@
 namespace graphics {
 #define MAX_KEYS 1024
 #define MAX_BUTTONS 32
+	__declspec(dllexport) void Print()
+	{
+		std::cout << "TEST__PRINT-)" << std::endl;
+	}
 
 	class Window {
 	private:

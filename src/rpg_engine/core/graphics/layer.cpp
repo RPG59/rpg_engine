@@ -32,7 +32,10 @@ namespace graphics {
 		for (Renderable2D* renderable : m_Renderables)
 		{
 			renderable->submit(m_Renderer);
+			delete renderable;
 		}
+
+		m_Renderables.clear();
 		m_Renderer->end();
 
 		m_Renderer->flush();
